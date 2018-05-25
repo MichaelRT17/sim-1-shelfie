@@ -15,7 +15,6 @@ export default class Dashboard extends Component {
     }
 
     render() {
-        console.log(this.props)
         let mapped = this.props.products.map(product => {
             return (
                 <Product
@@ -24,6 +23,9 @@ export default class Dashboard extends Component {
                     product_name={product.product_name}
                     product_price={product.product_price}
                     deleteProduct={this.deleteProduct}
+                    product_id={product.product_id}
+                    selectProduct={this.props.selectProduct}
+                    toggle={this.props.toggle}
                 />
             )
         })

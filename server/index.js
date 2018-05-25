@@ -9,7 +9,8 @@ app.use(bodyParser.json());
 
 app.get('/api/inventory', ctrl.showProducts);
 app.post('/api/product', ctrl.createProduct);
-app.delete('/api/deleteProduct/:id', ctrl.deleteProduct)
+app.delete('/api/deleteProduct/:id', ctrl.deleteProduct);
+app.put('/api/editProduct/:id', ctrl.updateProduct);
 
 const PORT = 8080;
 

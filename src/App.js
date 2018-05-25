@@ -10,23 +10,47 @@ class App extends Component {
     super();
 
     this.state = {
-      products: []
+      products: [],
+      selectedProduct: {},
+      editToggle: false
     }
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.selectProduct = this.selectProduct.bind(this);
+    this.editToggle = this.editToggle.bind(this);
   }
 
   componentDidMount() {
     axios.get('/api/inventory').then(res => {
-      this.setState({products: res.data})
+      this.setState({ products: res.data })
+    })
+  }
+
+  selectProduct(product) {
+    this.setState({ 
+      selectedProduct: product,
+    })
+    this.editToggle()
+  }
+
+  editToggle() {
+    this.setState({
+      editToggle: !this.state.editToggle
     })
   }
 
   render() {
-    console.log(this.state.products)
     return (
       <div className="App">
-        <Dashboard products = {this.state.products} getProducts={this.componentDidMount}/>
-        <Form getProducts={this.componentDidMount}/> 
+        <Dashboard
+          products={this.state.products}
+          getProducts={this.componentDidMount}
+          selectProduct={this.selectProduct}
+        />
+        <Form
+          getProducts={this.componentDidMount}
+          selected={this.state.selectedProduct}
+          toggle={this.editToggle}
+        />
         <Header />
       </div>
     );
